@@ -23,11 +23,14 @@ setInterval(()=>{
         const day = time.getDay();
         const hour = time.getHours();
         let minutes = time.getMinutes();
-        const hoursIn12HrFormat = hour >=13 ? hour%12 : hour;
+        let hoursIn12HrFormat = hour >=13 ? hour%12 : hour;
         const appm = hour >= 12 ? 'PM' : 'AM';
 
         if(minutes<10){
             minutes = '0' + minutes;
+        }
+        if(hoursIn12HrFormat<10){
+            hoursIn12HrFormat = '0' + hoursIn12HrFormat;
         }
 
         timeEl.innerHTML = hoursIn12HrFormat + ':' + minutes + ' ' + `<span id="am-pm">${appm}</span>`
