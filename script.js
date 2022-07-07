@@ -52,6 +52,7 @@ setInterval(()=>{
             })
         })
     }
+    getWeatherData();
 
     function showWeatherData(data){
         let {humidity, pressure,sunrise,feels_like,sunset,temp,uvi,wind_speed,clouds}= data.current;
