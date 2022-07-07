@@ -48,7 +48,7 @@ setInterval(()=>{
 
 
                 
-                console.log(data);
+                
                 showWeatherData(data);
             })
         })
