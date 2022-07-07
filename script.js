@@ -35,14 +35,12 @@ setInterval(()=>{
 
     },1000);
     
-    getWeatherData();
 
     function getWeatherData(){
         navigator.geolocation.getCurrentPosition((success)=>{
 
 
             let {latitude,longitude} = success.coords;
-            console.log(`${longitude}`);
 
 
             fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data =>{
@@ -56,24 +54,49 @@ setInterval(()=>{
     }
 
     function showWeatherData(data){
-        let {humidity, pressure,sunrise,sunset,temp,uvi,wind_speed,clouds}= data.current;
+        let {humidity, pressure,sunrise,feels_like,sunset,temp,uvi,wind_speed,clouds}= data.current;
+       let weather = data.current.weather[0].description;
+       timezone.innerHTML=data.timezone;
+        countryEl.innerHTML=data.lat +'N  '+ data.lon+ 'E';
+        let humiScale = '';
+        let uv='';
+
+
+        if(humidity>60){
+            humiScale='Sticky';
+
+        }
+        else if(humidity<60 && humidity>40){
+            humiScale='Comfortable';
+        }
+        else if(humidity<40){
+            humiScale='Dry';
+        }
         
+        
+        if(uvi<=2){
+            uv='low';
+        }else if(uvi>=3 && uvi<=5){
+            uv='Moderate';
+        }else if(uvi>=6 && uvi<=7){
+            uv='High';
+        }else if(uvi>=8 && uvi<=10){
+            uv='Very High';
+        }
+
         currentWeatherItems.innerHTML=`<div class="weather-item">
-        <div>Humidity</div>
-        <div>${humidity}%</div>
+        <div>Weather</div>
+        <div>${weather}</div>
     </div>
     <div class="weather-item">
-        <div>Pressure</div>
-        <div>${pressure}</div>
+        <div>Humidity</div>
+        <div>${humiScale}</div>
     </div>
     <div class="weather-item">
         <div>Cloud</div>
-        <div>${clouds}</div>
+        <div>${clouds}%</div>
     </div>
-    <div class="weather-item">
-        <div>Wind speed</div>
-        <div>${wind_speed}</div>
-    </div>
+    
     <div class="weather-item">
         <div>Sunrise</div>
         <div>${window.moment(sunrise*1000).format('HH:mm a')}</div>
@@ -84,7 +107,12 @@ setInterval(()=>{
     </div>
     <div class="weather-item">
         <div>UV</div>
-        <div>${uvi}</div>
+        <div>${uv}</div>
+    </div>
+    
+    <div class="weather-item">
+        <div>Feels like</div>
+        <div>${feels_like}&#176; C</div>
     </div>`;
         
 
