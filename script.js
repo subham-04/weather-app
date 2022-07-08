@@ -87,6 +87,8 @@ setInterval(()=>{
             uv='High';
         }else if(uvi>=8 && uvi<=10){
             uv='Very High';
+        }else if(uv>10){
+            uv='Extreme';
         }
 
         currentWeatherItems.innerHTML=`<div class="weather-item">
