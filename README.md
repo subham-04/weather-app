@@ -29,8 +29,3 @@
 
 <br>
 
-## Demo
-
-Demo link
-
-https://timely-squirrel-11df0b.netlify.app/
