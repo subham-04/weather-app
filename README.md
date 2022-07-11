@@ -17,7 +17,7 @@
 
 <br>
 
-![App Screenshot](https://github.com/subham-04/Portfolio/blob/main/pp.png)
+![App Screenshot](https://github.com/subham-04/weather-app/blob/main/w-d.png)
 
 <br>
 
